@@ -1828,6 +1828,169 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+    /* ══════════════════════════════════════════
+       MATCHING GAME STYLES
+    ══════════════════════════════════════════ */
+    .match-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 4px 12px;
+    }
+    .match-back-btn, .match-reset-btn {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 100px;
+      padding: 7px 18px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(16px);
+    }
+    .match-back-btn:active, .match-reset-btn:active { transform: scale(0.95); }
+    .match-status {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.2px;
+    }
+    .match-prog-track {
+      height: 3px;
+      background: rgba(200,150,130,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .match-prog-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--orange));
+      border-radius: 3px;
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    .match-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .match-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    /* Cards */
+    .match-card {
+      background: var(--glass-bg);
+      border: 1.5px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4;
+      cursor: pointer;
+      transition: transform 0.18s cubic-bezier(.34,1.56,.64,1),
+                  box-shadow 0.18s ease,
+                  border-color 0.18s ease,
+                  background 0.18s ease;
+      box-shadow: 0 4px 18px rgba(200,100,80,0.08);
+      user-select: none;
+      -webkit-user-select: none;
+      word-break: break-word;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .match-card::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 70px; height: 70px;
+      background: radial-gradient(circle, rgba(255,220,180,0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .match-card:active { transform: scale(0.97); }
+    @media (hover:hover) {
+      .match-card:hover:not(.matched):not(.wrong) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(200,100,80,0.18);
+      }
+    }
+    /* States */
+    .match-card.selected {
+      border-color: var(--accent);
+      background: rgba(232,132,90,0.12);
+      box-shadow: 0 0 0 3px rgba(232,132,90,0.18), 0 8px 28px rgba(200,100,80,0.18);
+      transform: scale(1.03);
+    }
+    .match-card.matched {
+      border-color: rgba(80,200,120,0.6);
+      background: rgba(80,200,120,0.10);
+      color: var(--text-secondary);
+      cursor: default;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+    .match-card.matched::after {
+      content: '✓';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #50c878;
+      font-weight: 600;
+    }
+    .match-card.wrong {
+      border-color: rgba(240,80,80,0.6);
+      background: rgba(240,80,80,0.09);
+      animation: shake-card 0.38s ease;
+    }
+    @keyframes shake-card {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    /* English card accent */
+    .match-card.en-card {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 14px;
+    }
+    /* Finish banner */
+    .match-finish {
+      text-align: center;
+      padding: 40px 20px;
+      animation: fade-in 0.4s ease;
+    }
+    .match-finish-emoji { font-size: 52px; margin-bottom: 12px; }
+    .match-finish-title {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .match-finish-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    /* Responsive: on small phones stack columns */
+    @media (max-width: 480px) {
+      .match-columns { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .match-card { font-size: 11.5px; padding: 11px 12px; min-height: 46px; }
+      .match-card.en-card { font-size: 12px; }
+    }
   </style>
 </head>
 
@@ -1872,6 +2035,7 @@
       <button class="tab-btn active" id="tabFlash" onclick="switchTab('flash')">📖 Học</button>
       <button class="tab-btn" id="tabTest" onclick="switchTab('test')">✏️ Test</button>
       <button class="tab-btn" id="tabGrammar" onclick="switchTab('grammar')">📝 Grammar</button>
+      <button class="tab-btn" id="tabMatch" onclick="switchTab('match')">🔗 Matching</button>
     </div>
 
     <!-- Tab: Flash -->
@@ -2040,6 +2204,64 @@
         Coded &amp; Designed by <span style="color:var(--accent);font-weight:500;">DuGiaVăn</span>
       </div>
     </div>
+
+    <!-- Tab: Matching -->
+    <div id="tabContentMatch" style="width:100%;display:none;flex-direction:column;align-items:center;">
+
+      <!-- Matching Setup -->
+      <div id="matchSetup" style="width:100%;max-width:720px;padding:0 20px 32px;">
+        <div style="padding:28px 0 8px;text-align:center;">
+          <div style="font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:var(--text-primary);letter-spacing:-0.5px;">Matching</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Kéo từ tiếng Anh ghép với nghĩa tiếng Việt</div>
+        </div>
+
+        <div class="test-unit-label" style="margin-top:20px;">Chọn Unit</div>
+        <div class="test-unit-pills" id="matchUnitPills"></div>
+
+        <div class="test-unit-label" style="margin-top:12px;">Số từ</div>
+        <div style="display:flex;gap:8px;margin-bottom:24px;" id="matchCountPills">
+          <button class="test-unit-pill active" data-mcount="10">10 từ</button>
+          <button class="test-unit-pill" data-mcount="20">20 từ</button>
+          <button class="test-unit-pill" data-mcount="30">30 từ</button>
+        </div>
+
+        <button class="test-start-btn" id="matchStartBtn">Bắt đầu Matching →</button>
+      </div>
+
+      <!-- Matching Game -->
+      <div id="matchGame" style="display:none;width:100%;max-width:900px;padding:0 16px 40px;">
+
+        <!-- topbar -->
+        <div class="match-topbar">
+          <button class="match-back-btn" id="matchBackBtn">← Về</button>
+          <div class="match-status">
+            <span id="matchPairsDone">0</span> / <span id="matchPairsTotal">0</span> cặp
+          </div>
+          <button class="match-reset-btn" id="matchResetBtn">↺ Làm lại</button>
+        </div>
+
+        <!-- progress -->
+        <div class="match-prog-track"><div class="match-prog-fill" id="matchProgFill" style="width:0%"></div></div>
+
+        <!-- columns -->
+        <div class="match-columns" id="matchColumns">
+          <div class="match-col" id="matchLeft"></div>
+          <div class="match-col" id="matchRight"></div>
+        </div>
+
+        <!-- finish banner -->
+        <div class="match-finish" id="matchFinish" style="display:none;">
+          <div class="match-finish-emoji">🎉</div>
+          <div class="match-finish-title">Hoàn thành!</div>
+          <div class="match-finish-sub" id="matchFinishSub"></div>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;">
+            <button class="test-unit-pill" id="matchFinishBack" style="padding:10px 24px;">← Về</button>
+            <button class="test-start-btn" id="matchFinishRetry" style="max-width:160px;padding:12px 24px;">Chơi lại 🔁</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- LEARN SCREEN -->
@@ -7327,9 +7549,21 @@
       document.getElementById('tabFlash').classList.toggle('active', tab === 'flash');
       document.getElementById('tabTest').classList.toggle('active', tab === 'test');
       document.getElementById('tabGrammar').classList.toggle('active', tab === 'grammar');
+      const matchBtn = document.getElementById('tabMatch');
+      if (matchBtn) matchBtn.classList.toggle('active', tab === 'match');
       document.getElementById('tabContentFlash').style.display = tab === 'flash' ? 'flex' : 'none';
       document.getElementById('tabContentTest').style.display = tab === 'test' ? 'flex' : 'none';
       document.getElementById('tabContentGrammar').style.display = tab === 'grammar' ? 'flex' : 'none';
+      const matchContent = document.getElementById('tabContentMatch');
+      if (matchContent) matchContent.style.display = tab === 'match' ? 'flex' : 'none';
+    }
+
+    // ── Quiz focus mode: hide/show tab nav and header ──
+    function setQuizFocus(active) {
+      const nav = document.querySelector('.tab-nav');
+      const header = document.querySelector('.home-header');
+      if (nav) nav.style.display = active ? 'none' : '';
+      if (header) header.style.display = active ? 'none' : '';
     }
 
     // ═══════════════════════════════════════════════════════
@@ -9085,6 +9319,8 @@
       document.getElementById('testSetup').style.display = panel === 'setup' ? 'block' : 'none';
       document.getElementById('testQuiz').style.display = panel === 'quiz' ? 'block' : 'none';
       document.getElementById('testResult').style.display = panel === 'result' ? 'block' : 'none';
+      // Tính năng 1: focus mode – ẩn tab nav & header khi đang quiz/result
+      setQuizFocus(panel === 'quiz' || panel === 'result');
     }
 
     function startQuiz() {
@@ -9285,6 +9521,246 @@
       showTestPanel('quiz');
       startQuiz();
     }
+
+    // ═══════════════════════════════════════════════════════
+    // MATCHING GAME
+    // ═══════════════════════════════════════════════════════
+    const matchState = {
+      selectedUnits: [],
+      wordCount: 10,
+      pairs: [],          // [{english, vietnamese}]
+      selected: null,     // { el, side, index }
+      matchedCount: 0,
+      startTime: 0
+    };
+
+    // ── Init matching unit pills ──
+    function initMatchPills() {
+      const container = document.getElementById('matchUnitPills');
+      if (!container || container.children.length > 0) return;
+      UNITS.forEach(u => {
+        const btn = document.createElement('button');
+        btn.className = 'test-unit-pill';
+        btn.textContent = `Unit ${u.id}: ${u.name}`;
+        btn.dataset.uid = u.id;
+        btn.addEventListener('click', () => {
+          btn.classList.toggle('active');
+          const id = parseInt(btn.dataset.uid);
+          if (matchState.selectedUnits.includes(id)) {
+            matchState.selectedUnits = matchState.selectedUnits.filter(x => x !== id);
+          } else {
+            matchState.selectedUnits.push(id);
+          }
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    // ── Count pills ──
+    document.getElementById('matchCountPills').querySelectorAll('[data-mcount]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#matchCountPills [data-mcount]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        matchState.wordCount = parseInt(btn.dataset.mcount);
+      });
+    });
+
+    // ── Start matching ──
+    document.getElementById('matchStartBtn').addEventListener('click', () => {
+      const ids = matchState.selectedUnits.length > 0
+        ? matchState.selectedUnits
+        : UNITS.map(u => u.id);
+
+      // Collect vocab only
+      let pool = [];
+      UNITS.filter(u => ids.includes(u.id)).forEach(u => {
+        u.words.forEach(w => {
+          if (w.type === 'vocabulary' && w.english && w.vietnamese) {
+            pool.push({ english: w.english, vietnamese: w.vietnamese });
+          }
+        });
+      });
+
+      if (pool.length < 4) {
+        alert('Không đủ từ vựng! Hãy chọn thêm unit.'); return;
+      }
+
+      // Deduplicate by english
+      const seen = new Set();
+      pool = pool.filter(p => {
+        if (seen.has(p.english)) return false;
+        seen.add(p.english); return true;
+      });
+
+      // Shuffle and pick
+      pool = pool.sort(() => Math.random() - 0.5);
+      const count = Math.min(matchState.wordCount, pool.length);
+      matchState.pairs = pool.slice(0, count);
+      matchState.matchedCount = 0;
+      matchState.selected = null;
+      matchState.startTime = Date.now();
+
+      renderMatchGame();
+      document.getElementById('matchSetup').style.display = 'none';
+      document.getElementById('matchGame').style.display = 'block';
+      document.getElementById('matchFinish').style.display = 'none';
+      document.getElementById('matchColumns').style.display = 'grid';
+      // hide tab nav & header for focus
+      setQuizFocus(true);
+    });
+
+    // ── Back / Reset ──
+    document.getElementById('matchBackBtn').addEventListener('click', exitMatchGame);
+    document.getElementById('matchResetBtn').addEventListener('click', () => {
+      matchState.matchedCount = 0;
+      matchState.selected = null;
+      matchState.startTime = Date.now();
+      renderMatchGame();
+      document.getElementById('matchFinish').style.display = 'none';
+      document.getElementById('matchColumns').style.display = 'grid';
+    });
+    document.getElementById('matchFinishBack').addEventListener('click', exitMatchGame);
+    document.getElementById('matchFinishRetry').addEventListener('click', () => {
+      matchState.matchedCount = 0;
+      matchState.selected = null;
+      matchState.startTime = Date.now();
+      renderMatchGame();
+      document.getElementById('matchFinish').style.display = 'none';
+      document.getElementById('matchColumns').style.display = 'grid';
+    });
+
+    function exitMatchGame() {
+      document.getElementById('matchGame').style.display = 'none';
+      document.getElementById('matchSetup').style.display = 'block';
+      setQuizFocus(false);
+    }
+
+    // ── Render ──
+    function renderMatchGame() {
+      const pairs = matchState.pairs;
+      const total = pairs.length;
+
+      document.getElementById('matchPairsDone').textContent = 0;
+      document.getElementById('matchPairsTotal').textContent = total;
+      document.getElementById('matchProgFill').style.width = '0%';
+
+      // Build shuffled right column (Vietnamese)
+      const rightOrder = [...pairs].sort(() => Math.random() - 0.5);
+
+      const leftCol = document.getElementById('matchLeft');
+      const rightCol = document.getElementById('matchRight');
+      leftCol.innerHTML = '';
+      rightCol.innerHTML = '';
+
+      pairs.forEach((pair, i) => {
+        const card = document.createElement('div');
+        card.className = 'match-card en-card';
+        card.textContent = pair.english;
+        card.dataset.index = i;
+        card.dataset.side = 'left';
+        card.addEventListener('click', () => onMatchCardClick(card));
+        // touch support
+        card.addEventListener('touchend', e => { e.preventDefault(); onMatchCardClick(card); });
+        leftCol.appendChild(card);
+      });
+
+      rightOrder.forEach((pair, i) => {
+        const origIndex = pairs.findIndex(p => p.english === pair.english);
+        const card = document.createElement('div');
+        card.className = 'match-card';
+        card.textContent = pair.vietnamese;
+        card.dataset.index = origIndex;
+        card.dataset.side = 'right';
+        card.addEventListener('click', () => onMatchCardClick(card));
+        card.addEventListener('touchend', e => { e.preventDefault(); onMatchCardClick(card); });
+        rightCol.appendChild(card);
+      });
+    }
+
+    // ── Card click logic ──
+    function onMatchCardClick(card) {
+      if (card.classList.contains('matched')) return;
+
+      const side = card.dataset.side;
+      const index = parseInt(card.dataset.index);
+
+      // If nothing selected yet
+      if (!matchState.selected) {
+        card.classList.add('selected');
+        matchState.selected = { el: card, side, index };
+        return;
+      }
+
+      const prev = matchState.selected;
+
+      // Clicked same card → deselect
+      if (prev.el === card) {
+        card.classList.remove('selected');
+        matchState.selected = null;
+        return;
+      }
+
+      // Clicked same side → move selection
+      if (prev.side === side) {
+        prev.el.classList.remove('selected');
+        card.classList.add('selected');
+        matchState.selected = { el: card, side, index };
+        return;
+      }
+
+      // Different sides → check match
+      if (prev.index === index) {
+        // Correct!
+        prev.el.classList.remove('selected');
+        prev.el.classList.add('matched');
+        card.classList.add('matched');
+        matchState.selected = null;
+        matchState.matchedCount++;
+        updateMatchProgress();
+        if (matchState.matchedCount === matchState.pairs.length) {
+          setTimeout(showMatchFinish, 450);
+        }
+      } else {
+        // Wrong
+        prev.el.classList.remove('selected');
+        prev.el.classList.add('wrong');
+        card.classList.add('wrong');
+        matchState.selected = null;
+        setTimeout(() => {
+          prev.el.classList.remove('wrong');
+          card.classList.remove('wrong');
+        }, 600);
+      }
+    }
+
+    function updateMatchProgress() {
+      const total = matchState.pairs.length;
+      const done = matchState.matchedCount;
+      document.getElementById('matchPairsDone').textContent = done;
+      document.getElementById('matchProgFill').style.width = `${(done / total) * 100}%`;
+    }
+
+    function showMatchFinish() {
+      const elapsed = Math.round((Date.now() - matchState.startTime) / 1000);
+      const mins = Math.floor(elapsed / 60);
+      const secs = elapsed % 60;
+      const timeStr = mins > 0 ? `${mins} phút ${secs} giây` : `${secs} giây`;
+      document.getElementById('matchFinishSub').textContent =
+        `Hoàn thành ${matchState.pairs.length} cặp trong ${timeStr} 🌟`;
+      document.getElementById('matchColumns').style.display = 'none';
+      document.getElementById('matchFinish').style.display = 'block';
+    }
+
+    // Init matching pills when tab is switched to 'match'
+    const _origSwitchTab = switchTab;
+    // Override: also init match pills on first visit
+    (function patchSwitchTab() {
+      const orig = window.switchTab;
+      window.switchTab = function(tab) {
+        orig(tab);
+        if (tab === 'match') initMatchPills();
+      };
+    })();
   </script>
 </body>
 
