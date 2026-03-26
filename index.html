@@ -11,23 +11,45 @@
     rel="stylesheet">
   <style>
     :root {
-      --pink: #f9c5d1;
-      --peach: #fddab0;
-      --orange: #f7b267;
-      --cream: #fff8f3;
-      --glass-bg: rgba(255, 255, 255, 0.55);
-      --glass-border: rgba(255, 255, 255, 0.8);
-      --shadow-soft: 0 8px 40px rgba(247, 178, 103, 0.18), 0 2px 12px rgba(249, 197, 209, 0.18);
-      --shadow-card: 0 20px 60px rgba(200, 100, 80, 0.12), 0 4px 20px rgba(249, 197, 209, 0.25);
-      --text-primary: #2d1f1a;
-      --text-secondary: #8a6a5e;
-      --text-muted: #c4a49c;
-      --accent: #e8845a;
-      --accent-light: #f5a87b;
-      --vocab-tag: #f7b267;
-      --example-tag: #f9c5d1;
-      --radius: 24px;
-      --radius-sm: 14px;
+      /* Màu sắc chủ đạo mới: Trắng & Đen */
+      --pink: #e0e0e0;
+      /* Đổi từ hồng sang xám nhạt */
+      --peach: #f5f5f5;
+      /* Đổi từ đào sang trắng khói */
+      --orange: #000000;
+      /* Đổi cam thành đen cho các điểm nhấn */
+      --cream: #ffffff;
+      /* Nền trắng tinh khiết */
+
+      /* Hiệu ứng kính (Glassmorphism) thành màu trắng sáng */
+      --glass-bg: rgba(255, 255, 255, 0.95);
+      --glass-border: #d1d1d1;
+      /* Viền xám mảnh cho rõ ràng */
+
+      /* Đổ bóng: Chuyển từ tông cam/hồng sang tông xám trung tính */
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+      /* MÀU CHỮ: Quan trọng nhất ở đây */
+      --text-primary: #000000;
+      /* Chữ chính: Đen tuyền */
+      --text-secondary: #333333;
+      /* Chữ phụ: Xám đậm */
+      --text-muted: #666666;
+      /* Chữ chú thích: Xám vừa */
+
+      /* Màu nhấn (Accent): Có thể dùng đen hoặc xanh dương để dễ nhìn */
+      --accent: #000000;
+      --accent-light: #444444;
+
+      --vocab-tag: #eeeeee;
+      /* Nền tag từ vựng: Xám cực nhẹ */
+      --example-tag: #f5f5f5;
+      /* Nền tag ví dụ */
+
+      --radius: 16px;
+      /* Bo góc ít hơn một chút cho nam tính/hiện đại */
+      --radius-sm: 8px;
     }
 
     * {
@@ -40,18 +62,22 @@
     body {
       font-family: 'DM Sans', sans-serif;
       min-height: 100dvh;
-      background: linear-gradient(135deg, #fce4ec 0%, #fddab0 45%, #f7c59f 75%, #f7b267 100%);
+      background: #ffffff;
+      /* Đổi thành màu trắng */
       background-attachment: fixed;
       overflow: hidden;
       position: relative;
+      color: #000000;
+      /* Đảm bảo chữ mặc định là màu đen */
     }
 
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: radial-gradient(ellipse at 20% 20%, rgba(255, 200, 180, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(249, 197, 209, 0.3) 0%, transparent 50%);
+      /* Đổi các thông số rgba thành màu xám trắng nhẹ */
+      background: radial-gradient(ellipse at 20% 20%, rgba(0, 0, 0, 0.03) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
@@ -101,12 +127,22 @@
     }
 
     .app-title {
-      font-family: 'Fraunces', serif;
+      /* 1. Đổi font từ 'Fraunces' (có chân) sang 'DM Sans' (không chân, dễ đọc) */
+      font-family: 'DM Sans', sans-serif;
+
       font-size: clamp(32px, 9vw, 52px);
-      font-weight: 300;
-      color: var(--text-primary);
+
+      /* 2. Tăng độ đậm lên một chút (từ 300 lên 600 hoặc 700) để nhìn rõ trên nền trắng */
+      font-weight: 600;
+
+      /* 3. Đảm bảo màu là đen tuyền (hoặc dùng biến --text-primary nếu bạn đã sửa ở :root) */
+      color: #000000;
+
       line-height: 1.1;
-      letter-spacing: -1px;
+
+      /* 4. Chỉnh lại khoảng cách chữ cho tự nhiên hơn (đổi từ -1px thành 0 hoặc -0.5px) */
+      letter-spacing: -0.5px;
+
       margin-bottom: 8px;
     }
 
@@ -180,12 +216,23 @@
     }
 
     .unit-name {
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
+      /* 1. Đổi font từ 'Fraunces' (có chân) sang 'DM Sans' (không chân) để dễ đọc hơn */
+      font-family: 'DM Sans', sans-serif;
+
+      /* 2. Tăng độ đậm lên 600 để tên bài học nổi bật trên nền trắng */
+      font-weight: 600;
+
+      /* 3. Giữ kích thước 19px hoặc tăng nhẹ lên 20px nếu muốn rõ hơn */
       font-size: 19px;
-      color: var(--text-primary);
+
+      /* 4. Đảm bảo màu là đen tuyền */
+      color: #000000;
+
       margin-bottom: 6px;
       line-height: 1.2;
+
+      /* 5. Thêm một chút khoảng cách chữ cho thoáng (tùy chọn) */
+      letter-spacing: -0.2px;
     }
 
     .unit-grammar {
@@ -1828,6 +1875,17 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* ── Quiz / Matching focus mode ── */
+    #homeScreen.quiz-focus .tab-nav,
+    #homeScreen.quiz-focus .home-header {
+      display: none !important;
+    }
+
+    #homeScreen.quiz-focus {
+      overflow-y: auto;
+    }
+
     /* ══════════════════════════════════════════
        MATCHING GAME STYLES
     ══════════════════════════════════════════ */
@@ -1837,7 +1895,9 @@
       justify-content: space-between;
       padding: 20px 4px 12px;
     }
-    .match-back-btn, .match-reset-btn {
+
+    .match-back-btn,
+    .match-reset-btn {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 100px;
@@ -1850,37 +1910,47 @@
       transition: all 0.2s ease;
       backdrop-filter: blur(16px);
     }
-    .match-back-btn:active, .match-reset-btn:active { transform: scale(0.95); }
+
+    .match-back-btn:active,
+    .match-reset-btn:active {
+      transform: scale(0.95);
+    }
+
     .match-status {
       font-size: 13px;
       font-weight: 500;
       color: var(--text-secondary);
       letter-spacing: 0.2px;
     }
+
     .match-prog-track {
       height: 3px;
-      background: rgba(200,150,130,0.2);
+      background: rgba(200, 150, 130, 0.2);
       border-radius: 3px;
       overflow: hidden;
       margin-bottom: 24px;
     }
+
     .match-prog-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--pink), var(--orange));
       border-radius: 3px;
-      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+      transition: width 0.5s cubic-bezier(.4, 0, .2, 1);
     }
+
     .match-columns {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
       align-items: start;
     }
+
     .match-col {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
+
     /* Cards */
     .match-card {
       background: var(--glass-bg);
@@ -1894,11 +1964,11 @@
       color: var(--text-primary);
       line-height: 1.4;
       cursor: pointer;
-      transition: transform 0.18s cubic-bezier(.34,1.56,.64,1),
-                  box-shadow 0.18s ease,
-                  border-color 0.18s ease,
-                  background 0.18s ease;
-      box-shadow: 0 4px 18px rgba(200,100,80,0.08);
+      transition: transform 0.18s cubic-bezier(.34, 1.56, .64, 1),
+        box-shadow 0.18s ease,
+        border-color 0.18s ease,
+        background 0.18s ease;
+      box-shadow: 0 4px 18px rgba(200, 100, 80, 0.08);
       user-select: none;
       -webkit-user-select: none;
       word-break: break-word;
@@ -1908,37 +1978,47 @@
       position: relative;
       overflow: hidden;
     }
+
     .match-card::before {
       content: '';
       position: absolute;
-      top: -30px; right: -30px;
-      width: 70px; height: 70px;
-      background: radial-gradient(circle, rgba(255,220,180,0.35) 0%, transparent 70%);
+      top: -30px;
+      right: -30px;
+      width: 70px;
+      height: 70px;
+      background: radial-gradient(circle, rgba(255, 220, 180, 0.35) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
-    .match-card:active { transform: scale(0.97); }
+
+    .match-card:active {
+      transform: scale(0.97);
+    }
+
     @media (hover:hover) {
       .match-card:hover:not(.matched):not(.wrong) {
         transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(200,100,80,0.18);
+        box-shadow: 0 8px 28px rgba(200, 100, 80, 0.18);
       }
     }
+
     /* States */
     .match-card.selected {
       border-color: var(--accent);
-      background: rgba(232,132,90,0.12);
-      box-shadow: 0 0 0 3px rgba(232,132,90,0.18), 0 8px 28px rgba(200,100,80,0.18);
+      background: rgba(232, 132, 90, 0.12);
+      box-shadow: 0 0 0 3px rgba(232, 132, 90, 0.18), 0 8px 28px rgba(200, 100, 80, 0.18);
       transform: scale(1.03);
     }
+
     .match-card.matched {
-      border-color: rgba(80,200,120,0.6);
-      background: rgba(80,200,120,0.10);
+      border-color: rgba(80, 200, 120, 0.6);
+      background: rgba(80, 200, 120, 0.10);
       color: var(--text-secondary);
       cursor: default;
       opacity: 0.65;
       pointer-events: none;
     }
+
     .match-card.matched::after {
       content: '✓';
       position: absolute;
@@ -1949,31 +2029,56 @@
       color: #50c878;
       font-weight: 600;
     }
+
     .match-card.wrong {
-      border-color: rgba(240,80,80,0.6);
-      background: rgba(240,80,80,0.09);
+      border-color: rgba(240, 80, 80, 0.6);
+      background: rgba(240, 80, 80, 0.09);
       animation: shake-card 0.38s ease;
     }
+
     @keyframes shake-card {
-      0%,100% { transform: translateX(0); }
-      20% { transform: translateX(-6px); }
-      40% { transform: translateX(6px); }
-      60% { transform: translateX(-4px); }
-      80% { transform: translateX(4px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20% {
+        transform: translateX(-6px);
+      }
+
+      40% {
+        transform: translateX(6px);
+      }
+
+      60% {
+        transform: translateX(-4px);
+      }
+
+      80% {
+        transform: translateX(4px);
+      }
     }
+
     /* English card accent */
     .match-card.en-card {
       font-family: 'Fraunces', serif;
       font-weight: 400;
       font-size: 14px;
     }
+
     /* Finish banner */
     .match-finish {
       text-align: center;
       padding: 40px 20px;
       animation: fade-in 0.4s ease;
     }
-    .match-finish-emoji { font-size: 52px; margin-bottom: 12px; }
+
+    .match-finish-emoji {
+      font-size: 52px;
+      margin-bottom: 12px;
+    }
+
     .match-finish-title {
       font-family: 'Fraunces', serif;
       font-size: 28px;
@@ -1981,15 +2086,28 @@
       color: var(--text-primary);
       margin-bottom: 8px;
     }
+
     .match-finish-sub {
       font-size: 14px;
       color: var(--text-secondary);
     }
+
     /* Responsive: on small phones stack columns */
     @media (max-width: 480px) {
-      .match-columns { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .match-card { font-size: 11.5px; padding: 11px 12px; min-height: 46px; }
-      .match-card.en-card { font-size: 12px; }
+      .match-columns {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .match-card {
+        font-size: 11.5px;
+        padding: 11px 12px;
+        min-height: 46px;
+      }
+
+      .match-card.en-card {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -2211,8 +2329,11 @@
       <!-- Matching Setup -->
       <div id="matchSetup" style="width:100%;max-width:720px;padding:0 20px 32px;">
         <div style="padding:28px 0 8px;text-align:center;">
-          <div style="font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:var(--text-primary);letter-spacing:-0.5px;">Matching</div>
-          <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Kéo từ tiếng Anh ghép với nghĩa tiếng Việt</div>
+          <div
+            style="font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:var(--text-primary);letter-spacing:-0.5px;">
+            Matching</div>
+          <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Kéo từ tiếng Anh ghép với nghĩa tiếng
+            Việt</div>
         </div>
 
         <div class="test-unit-label" style="margin-top:20px;">Chọn Unit</div>
@@ -2241,7 +2362,9 @@
         </div>
 
         <!-- progress -->
-        <div class="match-prog-track"><div class="match-prog-fill" id="matchProgFill" style="width:0%"></div></div>
+        <div class="match-prog-track">
+          <div class="match-prog-fill" id="matchProgFill" style="width:0%"></div>
+        </div>
 
         <!-- columns -->
         <div class="match-columns" id="matchColumns">
@@ -2256,7 +2379,8 @@
           <div class="match-finish-sub" id="matchFinishSub"></div>
           <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;">
             <button class="test-unit-pill" id="matchFinishBack" style="padding:10px 24px;">← Về</button>
-            <button class="test-start-btn" id="matchFinishRetry" style="max-width:160px;padding:12px 24px;">Chơi lại 🔁</button>
+            <button class="test-start-btn" id="matchFinishRetry" style="max-width:160px;padding:12px 24px;">Chơi lại
+              🔁</button>
           </div>
         </div>
       </div>
@@ -7560,10 +7684,16 @@
 
     // ── Quiz focus mode: hide/show tab nav and header ──
     function setQuizFocus(active) {
-      const nav = document.querySelector('.tab-nav');
-      const header = document.querySelector('.home-header');
-      if (nav) nav.style.display = active ? 'none' : '';
-      if (header) header.style.display = active ? 'none' : '';
+      const home = document.getElementById('homeScreen');
+      if (home) {
+        if (active) {
+          home.classList.add('quiz-focus');
+          // Scroll to top so quiz content is immediately visible
+          home.scrollTop = 0;
+        } else {
+          home.classList.remove('quiz-focus');
+        }
+      }
     }
 
     // ═══════════════════════════════════════════════════════
@@ -9522,22 +9652,77 @@
       startQuiz();
     }
 
+
     // ═══════════════════════════════════════════════════════
-    // MATCHING GAME
+    // MATCHING GAME v2 – fast + Web Audio sounds
     // ═══════════════════════════════════════════════════════
+
+    // ── Web Audio API ──
+    let _matchAC = null;
+    function getMatchAC() {
+      if (!_matchAC) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) _matchAC = new AC();
+      }
+      if (_matchAC && _matchAC.state === 'suspended') _matchAC.resume();
+      return _matchAC;
+    }
+
+    function playTone(freq, type, dur, vol, delay) {
+      try {
+        const ac = getMatchAC(); if (!ac) return;
+        const o = ac.createOscillator();
+        const g = ac.createGain();
+        o.connect(g); g.connect(ac.destination);
+        o.type = type;
+        const t = ac.currentTime + (delay || 0);
+        o.frequency.setValueAtTime(freq, t);
+        g.gain.setValueAtTime(vol, t);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.start(t); o.stop(t + dur + 0.01);
+      } catch (e) { }
+    }
+
+    function sndCorrect() {
+      playTone(660, 'sine', 0.13, 0.22, 0);
+      playTone(880, 'sine', 0.16, 0.18, 0.10);
+    }
+
+    function sndWrong() {
+      playTone(200, 'sawtooth', 0.10, 0.18, 0);
+      playTone(150, 'sawtooth', 0.10, 0.14, 0.08);
+    }
+
+    function sndWin() {
+      // Bright ascending fanfare
+      [523, 659, 784, 1047, 1319].forEach((f, i) => playTone(f, 'sine', 0.22, 0.20, i * 0.10));
+      setTimeout(() => {
+        [1568, 1760, 2093].forEach((f, i) => playTone(f, 'sine', 0.18, 0.16, i * 0.09));
+      }, 620);
+    }
+
+    function sndSad() {
+      // Descending minor arpeggio
+      [392, 349, 330, 294, 262].forEach((f, i) => playTone(f, 'triangle', 0.28, 0.18, i * 0.14));
+    }
+
+    // ── State ──
     const matchState = {
       selectedUnits: [],
       wordCount: 10,
-      pairs: [],          // [{english, vietnamese}]
-      selected: null,     // { el, side, index }
+      pairs: [],
+      selEl: null,
+      selSide: null,
+      selIdx: null,
       matchedCount: 0,
-      startTime: 0
+      startTime: 0,
+      locked: false
     };
 
-    // ── Init matching unit pills ──
+    // ── Init unit pills (lazy, once) ──
     function initMatchPills() {
-      const container = document.getElementById('matchUnitPills');
-      if (!container || container.children.length > 0) return;
+      const c = document.getElementById('matchUnitPills');
+      if (!c || c.children.length > 0) return;
       UNITS.forEach(u => {
         const btn = document.createElement('button');
         btn.className = 'test-unit-pill';
@@ -9546,13 +9731,11 @@
         btn.addEventListener('click', () => {
           btn.classList.toggle('active');
           const id = parseInt(btn.dataset.uid);
-          if (matchState.selectedUnits.includes(id)) {
-            matchState.selectedUnits = matchState.selectedUnits.filter(x => x !== id);
-          } else {
-            matchState.selectedUnits.push(id);
-          }
+          const idx = matchState.selectedUnits.indexOf(id);
+          if (idx === -1) matchState.selectedUnits.push(id);
+          else matchState.selectedUnits.splice(idx, 1);
         });
-        container.appendChild(btn);
+        c.appendChild(btn);
       });
     }
 
@@ -9565,199 +9748,180 @@
       });
     });
 
-    // ── Start matching ──
+    // ── Start ──
     document.getElementById('matchStartBtn').addEventListener('click', () => {
+      getMatchAC(); // unlock audio on user gesture
       const ids = matchState.selectedUnits.length > 0
-        ? matchState.selectedUnits
-        : UNITS.map(u => u.id);
+        ? matchState.selectedUnits : UNITS.map(u => u.id);
 
-      // Collect vocab only
       let pool = [];
+      const seen = new Set();
       UNITS.filter(u => ids.includes(u.id)).forEach(u => {
         u.words.forEach(w => {
-          if (w.type === 'vocabulary' && w.english && w.vietnamese) {
-            pool.push({ english: w.english, vietnamese: w.vietnamese });
+          if (w.type === 'vocabulary' && w.english && w.vietnamese && !seen.has(w.english)) {
+            seen.add(w.english);
+            pool.push({ en: w.english, vi: w.vietnamese });
           }
         });
       });
+      if (pool.length < 4) { alert('Không đủ từ vựng! Hãy chọn thêm unit.'); return; }
 
-      if (pool.length < 4) {
-        alert('Không đủ từ vựng! Hãy chọn thêm unit.'); return;
+      // Fisher-Yates shuffle
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = (Math.random() * (i + 1)) | 0;
+        [pool[i], pool[j]] = [pool[j], pool[i]];
       }
-
-      // Deduplicate by english
-      const seen = new Set();
-      pool = pool.filter(p => {
-        if (seen.has(p.english)) return false;
-        seen.add(p.english); return true;
-      });
-
-      // Shuffle and pick
-      pool = pool.sort(() => Math.random() - 0.5);
-      const count = Math.min(matchState.wordCount, pool.length);
-      matchState.pairs = pool.slice(0, count);
-      matchState.matchedCount = 0;
-      matchState.selected = null;
-      matchState.startTime = Date.now();
-
-      renderMatchGame();
+      const n = Math.min(matchState.wordCount, pool.length);
+      matchState.pairs = pool.slice(0, n);
+      _resetMatchState();
+      _renderMatch();
       document.getElementById('matchSetup').style.display = 'none';
       document.getElementById('matchGame').style.display = 'block';
       document.getElementById('matchFinish').style.display = 'none';
       document.getElementById('matchColumns').style.display = 'grid';
-      // hide tab nav & header for focus
       setQuizFocus(true);
     });
 
-    // ── Back / Reset ──
-    document.getElementById('matchBackBtn').addEventListener('click', exitMatchGame);
-    document.getElementById('matchResetBtn').addEventListener('click', () => {
+    function _resetMatchState() {
       matchState.matchedCount = 0;
-      matchState.selected = null;
+      matchState.selEl = null;
+      matchState.selSide = null;
+      matchState.selIdx = null;
+      matchState.locked = false;
       matchState.startTime = Date.now();
-      renderMatchGame();
-      document.getElementById('matchFinish').style.display = 'none';
-      document.getElementById('matchColumns').style.display = 'grid';
-    });
-    document.getElementById('matchFinishBack').addEventListener('click', exitMatchGame);
-    document.getElementById('matchFinishRetry').addEventListener('click', () => {
-      matchState.matchedCount = 0;
-      matchState.selected = null;
-      matchState.startTime = Date.now();
-      renderMatchGame();
-      document.getElementById('matchFinish').style.display = 'none';
-      document.getElementById('matchColumns').style.display = 'grid';
-    });
+    }
 
-    function exitMatchGame() {
+    // ── Back / Reset ──
+    document.getElementById('matchBackBtn').addEventListener('click', _exitMatch);
+    document.getElementById('matchResetBtn').addEventListener('click', _retryMatch);
+    document.getElementById('matchFinishBack').addEventListener('click', _exitMatch);
+    document.getElementById('matchFinishRetry').addEventListener('click', _retryMatch);
+
+    function _exitMatch() {
       document.getElementById('matchGame').style.display = 'none';
       document.getElementById('matchSetup').style.display = 'block';
       setQuizFocus(false);
     }
+    function _retryMatch() {
+      _resetMatchState();
+      _renderMatch();
+      document.getElementById('matchFinish').style.display = 'none';
+      document.getElementById('matchColumns').style.display = 'grid';
+    }
 
-    // ── Render ──
-    function renderMatchGame() {
+    // ── Render with DocumentFragment (fast, no reflow spam) ──
+    function _renderMatch() {
       const pairs = matchState.pairs;
-      const total = pairs.length;
-
-      document.getElementById('matchPairsDone').textContent = 0;
-      document.getElementById('matchPairsTotal').textContent = total;
+      const n = pairs.length;
+      document.getElementById('matchPairsDone').textContent = '0';
+      document.getElementById('matchPairsTotal').textContent = n;
       document.getElementById('matchProgFill').style.width = '0%';
 
-      // Build shuffled right column (Vietnamese)
-      const rightOrder = [...pairs].sort(() => Math.random() - 0.5);
+      // Shuffle right indices
+      const ri = pairs.map((_, i) => i);
+      for (let i = ri.length - 1; i > 0; i--) {
+        const j = (Math.random() * (i + 1)) | 0;
+        [ri[i], ri[j]] = [ri[j], ri[i]];
+      }
 
-      const leftCol = document.getElementById('matchLeft');
-      const rightCol = document.getElementById('matchRight');
-      leftCol.innerHTML = '';
-      rightCol.innerHTML = '';
+      const lf = document.createDocumentFragment();
+      const rf = document.createDocumentFragment();
+      pairs.forEach((p, i) => lf.appendChild(_mkCard(p.en, i, 'left', true)));
+      ri.forEach(i => rf.appendChild(_mkCard(pairs[i].vi, i, 'right', false)));
 
-      pairs.forEach((pair, i) => {
-        const card = document.createElement('div');
-        card.className = 'match-card en-card';
-        card.textContent = pair.english;
-        card.dataset.index = i;
-        card.dataset.side = 'left';
-        card.addEventListener('click', () => onMatchCardClick(card));
-        // touch support
-        card.addEventListener('touchend', e => { e.preventDefault(); onMatchCardClick(card); });
-        leftCol.appendChild(card);
-      });
-
-      rightOrder.forEach((pair, i) => {
-        const origIndex = pairs.findIndex(p => p.english === pair.english);
-        const card = document.createElement('div');
-        card.className = 'match-card';
-        card.textContent = pair.vietnamese;
-        card.dataset.index = origIndex;
-        card.dataset.side = 'right';
-        card.addEventListener('click', () => onMatchCardClick(card));
-        card.addEventListener('touchend', e => { e.preventDefault(); onMatchCardClick(card); });
-        rightCol.appendChild(card);
-      });
+      const lc = document.getElementById('matchLeft');
+      const rc = document.getElementById('matchRight');
+      lc.innerHTML = ''; rc.innerHTML = '';
+      lc.appendChild(lf); rc.appendChild(rf);
     }
 
-    // ── Card click logic ──
-    function onMatchCardClick(card) {
-      if (card.classList.contains('matched')) return;
+    function _mkCard(text, idx, side, isEn) {
+      const d = document.createElement('div');
+      d.className = 'match-card' + (isEn ? ' en-card' : '');
+      d.textContent = text;
+      d.dataset.index = idx;
+      d.dataset.side = side;
+      // pointerdown = instant (no 300ms touch delay)
+      d.addEventListener('pointerdown', _onCard, { passive: true });
+      return d;
+    }
 
+    function _onCard(e) {
+      const card = e.currentTarget;
+      if (card.classList.contains('matched') || matchState.locked) return;
+      _handleCard(card);
+    }
+
+    function _handleCard(card) {
       const side = card.dataset.side;
-      const index = parseInt(card.dataset.index);
+      const idx = parseInt(card.dataset.index);
+      const prev = matchState.selEl;
 
-      // If nothing selected yet
-      if (!matchState.selected) {
+      // Nothing selected yet
+      if (!prev) {
         card.classList.add('selected');
-        matchState.selected = { el: card, side, index };
+        matchState.selEl = card; matchState.selSide = side; matchState.selIdx = idx;
         return;
       }
-
-      const prev = matchState.selected;
-
-      // Clicked same card → deselect
-      if (prev.el === card) {
+      // Tap same card → deselect
+      if (prev === card) {
         card.classList.remove('selected');
-        matchState.selected = null;
+        matchState.selEl = null; matchState.selSide = null; matchState.selIdx = null;
         return;
       }
-
-      // Clicked same side → move selection
-      if (prev.side === side) {
-        prev.el.classList.remove('selected');
+      // Tap same side → move selection
+      if (matchState.selSide === side) {
+        prev.classList.remove('selected');
         card.classList.add('selected');
-        matchState.selected = { el: card, side, index };
+        matchState.selEl = card; matchState.selSide = side; matchState.selIdx = idx;
         return;
       }
-
-      // Different sides → check match
-      if (prev.index === index) {
-        // Correct!
-        prev.el.classList.remove('selected');
-        prev.el.classList.add('matched');
+      // Different sides → evaluate
+      if (matchState.selIdx === idx) {
+        // ✅ Match!
+        sndCorrect();
+        prev.classList.remove('selected'); prev.classList.add('matched');
         card.classList.add('matched');
-        matchState.selected = null;
+        matchState.selEl = null; matchState.selSide = null; matchState.selIdx = null;
         matchState.matchedCount++;
-        updateMatchProgress();
-        if (matchState.matchedCount === matchState.pairs.length) {
-          setTimeout(showMatchFinish, 450);
-        }
+        // Update progress
+        const done = matchState.matchedCount, total = matchState.pairs.length;
+        document.getElementById('matchPairsDone').textContent = done;
+        document.getElementById('matchProgFill').style.width = `${done / total * 100}%`;
+        if (done === total) setTimeout(_showMatchFinish, 340);
       } else {
-        // Wrong
-        prev.el.classList.remove('selected');
-        prev.el.classList.add('wrong');
+        // ❌ Wrong
+        sndWrong();
+        matchState.locked = true;
+        prev.classList.remove('selected'); prev.classList.add('wrong');
         card.classList.add('wrong');
-        matchState.selected = null;
+        matchState.selEl = null; matchState.selSide = null; matchState.selIdx = null;
         setTimeout(() => {
-          prev.el.classList.remove('wrong');
-          card.classList.remove('wrong');
-        }, 600);
+          prev.classList.remove('wrong'); card.classList.remove('wrong');
+          matchState.locked = false;
+        }, 400);
       }
     }
 
-    function updateMatchProgress() {
-      const total = matchState.pairs.length;
-      const done = matchState.matchedCount;
-      document.getElementById('matchPairsDone').textContent = done;
-      document.getElementById('matchProgFill').style.width = `${(done / total) * 100}%`;
-    }
-
-    function showMatchFinish() {
+    function _showMatchFinish() {
       const elapsed = Math.round((Date.now() - matchState.startTime) / 1000);
-      const mins = Math.floor(elapsed / 60);
-      const secs = elapsed % 60;
+      const mins = Math.floor(elapsed / 60), secs = elapsed % 60;
       const timeStr = mins > 0 ? `${mins} phút ${secs} giây` : `${secs} giây`;
+      const total = matchState.pairs.length;
+      // Impressive = avg < 6s per pair
+      if (elapsed / total < 6) sndWin();
+      else sndWin(); // always celebrate – use sndSad() only on giving up
       document.getElementById('matchFinishSub').textContent =
-        `Hoàn thành ${matchState.pairs.length} cặp trong ${timeStr} 🌟`;
+        `Hoàn thành ${total} cặp trong ${timeStr} 🌟`;
       document.getElementById('matchColumns').style.display = 'none';
       document.getElementById('matchFinish').style.display = 'block';
     }
 
-    // Init matching pills when tab is switched to 'match'
-    const _origSwitchTab = switchTab;
-    // Override: also init match pills on first visit
-    (function patchSwitchTab() {
-      const orig = window.switchTab;
-      window.switchTab = function(tab) {
-        orig(tab);
+    // ── Patch switchTab to lazy-init pills ──
+    (function () {
+      const _orig = switchTab;
+      switchTab = function (tab) {
+        _orig(tab);
         if (tab === 'match') initMatchPills();
       };
     })();
