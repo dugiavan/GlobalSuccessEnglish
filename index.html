@@ -1953,52 +1953,103 @@
 
     /* Cards */
     .match-card {
-      background: var(--glass-bg);
-      border: 1.5px solid var(--glass-border);
+      /* Màu nền trắng trong suốt kết hợp kính mờ */
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
       padding: 14px 16px;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
+      /* Tăng độ đậm cho chữ sang hơn */
       color: var(--text-primary);
       line-height: 1.4;
       cursor: pointer;
-      transition: transform 0.18s cubic-bezier(.34, 1.56, .64, 1),
-        box-shadow 0.18s ease,
-        border-color 0.18s ease,
-        background 0.18s ease;
-      box-shadow: 0 4px 18px rgba(200, 100, 80, 0.08);
+
+      /* Chuyển động mượt mà hơn với cubic-bezier */
+      transition:
+        transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        opacity 0.4s ease;
+
+      /* Đổ bóng đa lớp tạo độ nổi khối (Soft UI) */
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 2px 4px -1px rgba(0, 0, 0, 0.03),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+
       user-select: none;
       -webkit-user-select: none;
       word-break: break-word;
-      min-height: 52px;
+      min-height: 56px;
       display: flex;
       align-items: center;
       position: relative;
       overflow: hidden;
     }
 
+    /* MÀU RIÊNG CHO CỘT TRÁI (Tiếng Việt) - Đậm hơn, tông Vàng Cát ấm */
+    .match-col:first-child .match-card {
+      background: rgba(255, 230, 200, 0.85);
+      /* Tăng độ vàng cát */
+      border-color: rgba(210, 160, 100, 0.4);
+      /* Viền rõ hơn */
+      color: #7c4d12;
+      /* Chữ nâu đậm cho hài hòa với nền vàng */
+    }
+
+    /* MÀU RIÊNG CHO CỘT PHẢI (Tiếng Anh) - Đậm hơn, tông Xanh Mint/Biển */
+    .match-col:last-child .match-card {
+      background: rgba(215, 235, 250, 0.85);
+      /* Tăng độ xanh biển nhạt */
+      border-color: rgba(100, 160, 210, 0.4);
+      /* Viền rõ hơn */
+      color: #1a4d7c;
+      /* Chữ xanh đậm cho hài hòa với nền xanh */
+    }
+
+    /* KHI CHỌN (SELECTED) - Làm trắng bừng lên để tách biệt hẳn với màu nền của cột */
+    .match-card.selected {
+      background: #ffffff !important;
+      border-color: var(--accent) !important;
+      color: var(--black) !important;
+      /* Trả về màu chữ chính */
+      transform: scale(1.05);
+      box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.12),
+        0 0 0 4px rgba(255, 255, 255, 0.5);
+      /* Thêm một lớp hào quang trắng */
+      z-index: 10;
+    }
+
     .match-card::before {
       content: '';
       position: absolute;
-      top: -30px;
-      right: -30px;
-      width: 70px;
-      height: 70px;
-      background: radial-gradient(circle, rgba(255, 220, 180, 0.35) 0%, transparent 70%);
-      border-radius: 50%;
+      top: -20%;
+      right: -10%;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+      opacity: 0.5;
       pointer-events: none;
     }
 
     .match-card:active {
-      transform: scale(0.97);
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.9);
     }
 
-    @media (hover:hover) {
+    @media (hover: hover) {
       .match-card:hover:not(.matched):not(.wrong) {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(200, 100, 80, 0.18);
+        transform: translateY(-5px) scale(1.02);
+        background: #ffffff;
+        border-color: var(--accent);
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
       }
     }
 
@@ -2011,11 +2062,12 @@
     }
 
     .match-card.matched {
-      border-color: rgba(80, 200, 120, 0.6);
-      background: rgba(80, 200, 120, 0.10);
-      color: var(--text-secondary);
-      cursor: default;
-      opacity: 0.65;
+      opacity: 0.4;
+      transform: scale(0.95);
+      filter: grayscale(80%);
+      background: rgba(0, 0, 0, 0.05);
+      border-color: transparent;
+      box-shadow: none;
       pointer-events: none;
     }
 
@@ -2031,9 +2083,11 @@
     }
 
     .match-card.wrong {
-      border-color: rgba(240, 80, 80, 0.6);
-      background: rgba(240, 80, 80, 0.09);
-      animation: shake-card 0.38s ease;
+      border-color: #ff4d4d !important;
+      background: rgba(255, 77, 77, 0.1) !important;
+      color: #d93025 !important;
+      animation: shake-card 0.4s cubic-bezier(.36, .07, .19, .97) both;
+      box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
     }
 
     @keyframes shake-card {
